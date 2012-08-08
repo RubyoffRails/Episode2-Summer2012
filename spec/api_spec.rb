@@ -3,9 +3,9 @@ require "ostruct"
 
 describe Api do
 
-  let(:movie) { Api.search_by_title("Forrest Gump") }
+  describe "found movie" do
+    let(:movie) { Api.search_by_title("Forrest Gump") }
 
-  describe "stubbed calls" do
     before do
       Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/forrest.json")) }
     end
@@ -27,15 +27,21 @@ describe Api do
     end
   end
 
-  it "should not raise an error when searching for non-existent movies" do
-    expect {
-      Api.search_by_title("NOTHINGFOUNDHERE")
-    }.to_not raise_error
-  end
+  describe "not found movie" do
+    before do
+      Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/not_found.json")) }
+    end
 
-  it "should return NOT_FOUND for the title if movie not found" do
-    movie_not_found = Api.search_by_title("THISMOVIEDOESNOTEXIST")
-    movie_not_found.title.should eq("NOT_FOUND")
+    it "should not raise an error when searching for non-existent movies" do
+      expect {
+        Api.search_by_title("NOTHINGFOUNDHERE")
+      }.to_not raise_error
+    end
+
+    it "should have #valid? = false for the title if movie not found" do
+      movie_not_found = Api.search_by_title("NOTHINGFOUNDHERE")
+      movie_not_found.valid?.should eq(false)
+    end
   end
 
 end
