@@ -1,4 +1,5 @@
 class Movie
+  NoMovie = Class.new
 
   attr_reader :id, :title, :year, :score
   def initialize(hash={})
