@@ -26,6 +26,22 @@ describe "#calculate_slope" do
       MovieCals.earliest_group(movies).should_not include movie2
     end 
   end
+
+  describe "#group_movies_by_year" do
+    it "groups movies by the year it was released" do
+    movie1, movie2, movie3 = stub(year: 1994), stub(year: 2002), stub(year: 1994)
+    movies = [movie1, movie2, movie3]
+    MovieCals.group_movies_by_year(movies).should eq [[1994, [movie1, movie3]], [2002, [movie2]]]
+    end
+  end
+
+  describe "#remove_year" do
+    it "flattens the grouped movies and removes the year" do
+      movie1, movie2, movie3 = stub, stub, stub
+      movies = [[1994, [movie1, movie3]], [2002, [movie2]]]
+      MovieCals.remove_year(movies.first).should eq [movie1, movie3]
+    end
+  end
 end
 
 describe "#mood" do
@@ -39,8 +55,14 @@ describe "#mood" do
     MovieCals.mood(movies).should eq "Getting happier!"
   end
 
-  it "returns even when there is no slope" do
+  it "returns undecided if it's only the first movie" do
     movies = [stub(score: 40, year: 2001)]
+    MovieCals.mood(movies).should eq "I can't decide with only one movie..."
+  end
+
+  it "returns even when there is no slope" do
+    movies = [stub(score: 40, year: 2001), stub(score: 30, year: 2001)]
     MovieCals.mood(movies).should eq "Staying even ;)"
   end
+  
 end

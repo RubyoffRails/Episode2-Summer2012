@@ -7,8 +7,21 @@ class MovieCals
     calc_avg_rating(earliest_group(movies))
   end
 
+  # returns a multitiered array grouped by year and sorted 
+  # starting array = [movie1(year: 1994), movie2(year: 2002), movie3(year: 1994)]
+  # returns [[1994, [movie1, movie3]], [2002, [movie2]]]
+  def self.group_movies_by_year(movies)
+    movies.group_by{|m| m.year}.sort
+  end
+
   def self.earliest_group(movies)
-    movies.group_by{|m| m.year}.sort.first.flatten[1..-1]
+    grouped_movies = group_movies_by_year(movies)
+    movies = remove_year(grouped_movies.first)
+  end
+
+  #cleans up a multitiered array to flatten the array and remove the year
+  def self.remove_year(movies_for_year)
+    movies_for_year.flatten[1..-1]
   end
 
   def self.earliest_year(movies)
@@ -20,7 +33,8 @@ class MovieCals
   end
 
   def self.latest_group(movies)
-    movies.group_by{ |m| m.year}.sort.last.flatten[1..-1]
+    grouped_movies = group_movies_by_year(movies)
+    movies = remove_year(grouped_movies.last)
   end
   
   def self.latest_year(movies)
@@ -37,6 +51,7 @@ class MovieCals
 
   def self.mood(movies)
     slope = calculate_ratings_slope(movies)
+    return "I can't decide with only one movie..." if movies.count == 1
     if slope > 0
       "Getting happier!"
     elsif slope < 0 
