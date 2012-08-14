@@ -8,5 +8,5 @@ describe Movie do
     movie.year.should eq(1998)
     movie.score.should eq(50)
   end
-  
+ 
 end

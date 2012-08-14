@@ -5,6 +5,7 @@ def find_movie
   puts "OH HAI. Search?"
   movie_title = gets
   movie = Api.search_by_title(movie_title)
+ 
   puts "Found: #{movie.title}. Score: #{movie.score}"
 end
 
@@ -19,3 +20,7 @@ while true do
     break
   end
 end
+
+while false do
+  puts "No title found"
+  end

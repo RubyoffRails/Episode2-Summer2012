@@ -24,4 +24,4 @@ describe Api do
   it "should return the year" do
     movie.year.should eq(1994)
   end
-end
+ end
