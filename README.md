@@ -1,4 +1,4 @@
-Episode 2 Summer 2012- BlackJack
+Episode 2 - Movie JSON
 =====================
 
 A simple API wrapper around the RottenTomato's service
