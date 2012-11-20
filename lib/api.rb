@@ -12,10 +12,9 @@ class Api
     Movie.new(id: struct.id.to_i,
               title: struct.title,
               year: struct.year,
-              score: struct.ratings["critics_score"]
+              score: struct.ratings.nil? ? nil : struct.ratings["critics_score"]
              )
   end
-
 
   def self.get_url_as_json(url)
     JSON.parse(open(url).read)
