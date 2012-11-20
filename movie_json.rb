@@ -1,11 +1,13 @@
 require_relative "lib/movie"
 require_relative "lib/api"
+require_relative "lib/movie_search"
 
 def find_movie
-  puts "OH HAI. Search?"
+  @searcher ||= MovieSearch.new
+  puts "OH HAI. Add a movie your really like!"
   movie_title = gets
-  movie = Api.search_by_title(movie_title)
-  puts "Found: #{movie.title}. Score: #{movie.score}"
+
+  puts @searcher.find_movie(movie_title)
 end
 
 find_movie
