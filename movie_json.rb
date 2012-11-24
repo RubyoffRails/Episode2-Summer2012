@@ -30,7 +30,10 @@ end
 def get_satisfaction(movies)
   min_movie = movies.min_by(&:year)
   max_movie = movies.max_by(&:year)
-  if (max_movie.score - min_movie.score).to_f / (max_movie.year - min_movie.year).to_f > 0
+  user_slope = (max_movie.score - min_movie.score).to_f / (max_movie.year - min_movie.year).to_f
+  if user_slope == 0
+    return "neutral"
+  elsif  user_slope > 0
     return "getting happier"
   else
     return "getting madder"
