@@ -30,7 +30,20 @@ end
 def get_satisfaction(movies)
   min_movie = movies.min_by(&:year)
   max_movie = movies.max_by(&:year)
-  user_slope = (max_movie.score - min_movie.score).to_f / (max_movie.year - min_movie.year).to_f
+  return "neutral" if min_movie == max_movie
+  max_movie_count, max_movie_score_total = 0, 0
+  min_movie_count, min_movie_score_total = 0, 0
+  movies.each do |movie|
+    if movie.year == max_movie.year
+      max_movie_count += 1 
+      max_movie_score_total += movie.score
+    end
+    if movie.year == min_movie.year
+      min_movie_count += 1 
+      min_movie_score_total += movie.score
+    end
+  end
+  user_slope = ((max_movie_score_total/max_movie_count).to_f - (min_movie_score_total/min_movie_count).to_f) / (max_movie.year - min_movie.year).to_f
   if user_slope == 0
     return "neutral"
   elsif  user_slope > 0
