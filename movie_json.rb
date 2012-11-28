@@ -9,6 +9,7 @@ def find_movie
   @search_history.add_search(movie)
   puts "Found: #{movie.title}. Score: #{movie.score}"
   puts "Average movie score: #{@search_history.average_rating}."
+  puts "Average movie year: #{@search_history.average_year_for_ratings}."
 end
 
 @search_history = Search_History.new
