@@ -10,6 +10,11 @@ def find_movie
   puts "Found: #{movie.title}. Score: #{movie.score}"
   puts "Average movie score: #{@search_history.average_rating}."
   puts "Average movie year: #{@search_history.average_year_for_ratings}."
+  if @search_history.ratings_trend > 0 then
+    puts "You are getting happier"
+  elsif @search_history.ratings_trend < 0 then
+    puts "You are getting madder"
+  end
 end
 
 @search_history = Search_History.new
