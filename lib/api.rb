@@ -1,9 +1,10 @@
 require "open-uri"
 require "json"
 require "ostruct"
-require_relative "./movie"
-class Api
 
+require_relative "./movie"
+
+class Api
   APIKEY="4t6456xa33z8qhcqyuqgnkjh"
 
   def self.search_by_title(title)
@@ -16,9 +17,7 @@ class Api
              )
   end
 
-
   def self.get_url_as_json(url)
     JSON.parse(open(url).read)
   end
-
 end

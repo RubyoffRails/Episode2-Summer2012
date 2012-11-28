@@ -1,6 +1,6 @@
 class Movie
-
   attr_reader :id, :title, :year, :score
+
   def initialize(hash={})
     @id = hash.fetch(:id)
     @title = hash.fetch(:title)

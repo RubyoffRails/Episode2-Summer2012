@@ -1,8 +1,8 @@
 require_relative "../lib/api"
+
 require "ostruct"
 
 describe Api do
-
   let(:movie) { Api.search_by_title("Forrest Gump") }
 
   before do
