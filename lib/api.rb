@@ -3,8 +3,6 @@ require "json"
 require "ostruct"
 require_relative "./movie"
 class Api
-  @@search_history = []
-
   APIKEY="4t6456xa33z8qhcqyuqgnkjh"
 
   def self.search_by_title(title)
@@ -17,7 +15,6 @@ class Api
                   year: struct.year,
                   score: struct.ratings["critics_score"]
                  )
-        @@search_history << movie
         return movie
       else
         Movie.new(id: 0,
@@ -37,13 +34,5 @@ class Api
 
   def self.get_url_as_json(url)
     JSON.parse(open(url).read)
-  end
-
-  def self.get_search_history()
-    @@search_history
-  end
-
-  def self.reset_search_history()
-    @@search_history = []
   end
 end

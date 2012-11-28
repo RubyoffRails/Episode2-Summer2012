@@ -38,17 +38,5 @@ describe Api do
     it "should return the year" do
       movie.year.should eq(1994)
     end
-    
-    it "should be able to reset the search history" do
-      Api.reset_search_history
-      Api.get_search_history.count.should eq(0)
-    end
-  end
-
-  context "Search History" do
-    it "should store latest search history" do
-      movie = Api.search_by_title("Forrest Gump")
-      Api.get_search_history.count.should eq(1)
-    end    
   end
 end
