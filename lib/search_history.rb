@@ -8,7 +8,7 @@ class Search_History
   end
 
   def add_search(movie)
-    @movies << movie
+    @movies << movie if movie.title != "NOTHINGFOUNDHERE"
   end
 
   def average_rating()

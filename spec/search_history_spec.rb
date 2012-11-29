@@ -65,4 +65,11 @@ describe Search_History do
     search_history.add_search(Api.search_by_title("Ace Ventura"))
     search_history.ratings_trend.should eq(-7)
   end
+
+  it "should not add invalid movies" do
+    search_history = Search_History.new
+    search_history.movies.count.should eq(0)
+    search_history.add_search(Api.search_by_title("Billy Maddison"))
+    search_history.movies.count.should eq(0)
+  end
 end
