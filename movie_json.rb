@@ -6,12 +6,7 @@ def find_movie
   movie_title = gets
   movie = Api.search_by_title(movie_title)
 
-  if movie == "Not Found"
-    puts "Not Found"
-  else
-    puts "Found: #{movie.title}. Score: #{movie.score}"
-  end
-
+  puts "Found: #{movie.title}. Score: #{movie.score}" if !movie.nil?
 end
 
 find_movie
