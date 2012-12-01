@@ -1,11 +1,29 @@
 require_relative "lib/movie"
 require_relative "lib/api"
 
+def get_average(movies)
+  averages = []
+
+  movies.each do |m|
+    averages << m.score
+  end
+
+  averages.inject{ |sum, el| sum + el }.to_f / averages.size
+
+end
+
 def find_movie
-  puts "OH HAI. Search?"
+  puts "Add a movie you really like"
   movie_title = gets
-  movie = Api.search_by_title(movie_title)
-  puts "Found: #{movie.title}. Score: #{movie.score}"
+  @movies = [] if @movies.nil?
+
+  begin
+    @movies << Api.search_by_title(movie_title)
+    puts "Found: #{@movies.last.title}. Score: #{@movies.last.score}. Avg. Score: #{get_average(@movies)}"
+  rescue Api::MovieNotFoundError
+    puts "Movie was not found :( :( "
+  end
+
 end
 
 find_movie
