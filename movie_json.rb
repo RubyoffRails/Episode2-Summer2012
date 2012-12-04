@@ -4,17 +4,16 @@ require_relative "lib/api"
 def find_movie
   puts 'Add a movie you really like:'
   movie_title = gets
-  if !(current_movie = Api.search_by_title(movie_title))
-    puts 'Oops. Something went wrong or title not found.'
-  else
-    @movies << current_movie
-    puts "Found: #{@movies.last.title}. Score: #{@movies.last.score} Year: #{@movies.last.year}" 
-    if @movies.length > 1
-      puts "Average movie score: #{get_average(@movies, "score", "float")}"
-      puts "Average movie year: #{get_average(@movies, "year", "integer")}"
-      puts get_satisfaction(@movies)
-    end
+  current_movie = Api.search_by_title(movie_title)
+  @movies << current_movie
+  puts "Found: #{@movies.last.title}. Score: #{@movies.last.score} Year: #{@movies.last.year}" 
+  if @movies.length > 1
+    puts "Average movie score: #{get_average(@movies, "score", "float")}"
+    puts "Average movie year: #{get_average(@movies, "year", "integer")}"
+    puts get_satisfaction(@movies)
   end
+  rescue Api::NilMovie
+    puts 'Oops. Something went wrong or title not found.'
 end
 
 def get_average(movies, attribute, type)
