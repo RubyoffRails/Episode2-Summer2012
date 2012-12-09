@@ -13,6 +13,14 @@ describe User do
     it "has a list of movie searches" do
       expect(user.searches).to eq([])
     end
+
+    it "can calculate an average movie rating score" do
+      movie = Movie.new(id: "1", title: "Some movie", year: 1985, score: 80)
+      user.add_to_searches(movie)
+      another_movie = Movie.new(id: "2", title: "Another movie", year: 2000, score: 60)
+      user.add_to_searches(another_movie)
+      expect(user.rating).to eq(70)
+    end
   end
 
   context "when a searching" do

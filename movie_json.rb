@@ -8,18 +8,22 @@ def start_movie_finder
 end
 
 def find_movie
-  puts "Search for a movie, #{@user.name}"
+  puts "Add a movie you really like, #{@user.name}"
   movie_title = gets
   movie = Api.search_by_title(movie_title)
   @user.add_to_searches(movie)
   if movie
     puts "Found: #{movie.title}. Score: #{movie.score}" 
+    puts "Your average movie rating is: #{@user.rating}"
   else
     puts "Movie not found."
   end
 end
 
 def show_movie_searches
+  puts "============================"
+  puts "Your final average movie rating score is: #{@user.rating}"
+  puts "============================"
   puts "Your search history:"
   @user.searches.each { |movie| puts movie.title }
 end
