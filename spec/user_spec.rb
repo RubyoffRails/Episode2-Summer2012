@@ -21,6 +21,12 @@ describe User do
       user.add_to_searches(another_movie)
       expect(user.rating).to eq(70)
     end
+
+    it "can calculate the average year of movies liked" do
+      user.add_to_searches(movie)
+      user.add_to_searches(another_movie)
+      expect(user.average_year).to eq(1992)
+    end
   end
 
   context "when a searching" do

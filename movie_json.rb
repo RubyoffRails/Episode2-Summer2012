@@ -23,6 +23,7 @@ end
 def show_movie_searches
   puts "============================"
   puts "Your final average movie rating score is: #{@user.rating}"
+  puts "The average year for the movies you have liked is: #{@user.average_year}"
   puts "============================"
   puts "Your search history:"
   @user.searches.each { |movie| puts movie.title }
