@@ -16,7 +16,7 @@ class Api
                 score: struct.ratings["critics_score"]
                )
     rescue
-      nil
+      nil  
     end
   end
 
