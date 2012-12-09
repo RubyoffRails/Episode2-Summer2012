@@ -12,7 +12,7 @@ describe User do
       expect(user.name).to eq("Ralph")
     end
 
-    it "has a list of movie searches" do
+    it "has an empty list of movie searches" do
       expect(user.searches).to eq([])
     end
 
