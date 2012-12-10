@@ -11,11 +11,13 @@ class User
   end
 
   def rating
-    searches.inject { |sum, el| sum.score + el.score } / searches.size
+    movie_scores = searches.map { |movie| movie.score }
+    movie_scores.inject { |sum, el| sum + el } / searches.size
   end
 
   def average_year
-    searches.inject { |sum, el| sum.year + el.year } / searches.size
+    movie_years = searches.map { |movie| movie.year }
+    movie_years.inject { |sum, el| sum + el } / searches.size
   end
 
   def average_rating_per_year
@@ -37,6 +39,27 @@ class User
       output[m[0]] = m[1].inject { |sum, el| sum + el } / m[1].length
     end
     output
+  end
+
+  def calculate_slope
+    avg_ratings = average_rating_per_year
+    key_array = []
+    avg_ratings.each_key { |key| key_array << key.to_i }
+    if key_array.size > 1
+      first_year = key_array.min
+      last_year = key_array.max
+      (avg_ratings[last_year.to_s] - avg_ratings[first_year.to_s]) / (last_year - first_year)
+    else
+      "No slope"
+    end
+  end
+
+  def picking_ability
+    if calculate_slope == "No slope"
+      "not yet determined."
+    else
+      calculate_slope > 0 ?  "getting better." : "getting worse."
+    end
   end
 end
 

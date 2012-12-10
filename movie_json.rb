@@ -22,23 +22,27 @@ end
 
 def show_movie_searches
   puts "============================"
-  puts "Your final average movie rating score is: #{@user.rating}"
+  puts "Your overall average movie rating score is: #{@user.rating}"
   puts "The average year for the movies you have liked is: #{@user.average_year}"
+  puts "============================"
+  puts "Your average movie rating score per year is:"
+  @user.average_rating_per_year.each_pair { |k, v| puts "For #{k}, your average movie rating was #{v}!"}
+  puts "Your picking ability is #{@user.picking_ability}"
   puts "============================"
   puts "Your search history:"
   @user.searches.each { |movie| puts movie.title }
 end
 
 start_movie_finder
-# find_movie
+find_movie
 
-#while true do
-  #puts "Search Again (Y/N)" 
-  #answer = gets.upcase[0]
-  #if answer == "Y"
-    #find_movie
-  #else
-    #show_movie_searches
-    #break
-  #end
-#end
+while true do
+  puts "Search Again (Y/N)" 
+  answer = gets.upcase[0]
+  if answer == "Y"
+    find_movie
+  else
+    show_movie_searches
+    break
+  end
+end
