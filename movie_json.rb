@@ -22,7 +22,6 @@ def show_movie_searches
   puts "Your overall average movie rating score is: #{@user.rating}"
   puts "The average year for the movies you have liked is: #{@user.average_year}"
   puts "============================"
-  puts "Your average movie rating score per year is:"
   @user.average_rating_per_year.each_pair { |k, v| puts "For #{k}, your average movie rating was #{v}!"}
   puts "Your picking ability is #{@user.picking_ability}"
   puts "============================"
