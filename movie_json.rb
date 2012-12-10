@@ -30,15 +30,15 @@ def show_movie_searches
 end
 
 start_movie_finder
-find_movie
+# find_movie
 
-while true do
-  puts "Search Again (Y/N)" 
-  answer = gets.upcase[0]
-  if answer == "Y"
-    find_movie
-  else
-    show_movie_searches
-    break
-  end
-end
+#while true do
+  #puts "Search Again (Y/N)" 
+  #answer = gets.upcase[0]
+  #if answer == "Y"
+    #find_movie
+  #else
+    #show_movie_searches
+    #break
+  #end
+#end
