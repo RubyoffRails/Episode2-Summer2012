@@ -11,11 +11,13 @@ class User
   end
 
   def rating
+    searches.delete_if { |m| m == nil } # since we are returning a string when no movie is found, I'm removing any nil values
     movie_scores = searches.map { |movie| movie.score }
     movie_scores.inject { |sum, el| sum + el } / searches.size
   end
 
   def average_year
+    searches.delete_if { |m| m == nil }
     movie_years = searches.map { |movie| movie.year }
     movie_years.inject { |sum, el| sum + el } / searches.size
   end

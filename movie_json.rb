@@ -12,11 +12,8 @@ def find_movie
   movie_title = gets
   movie = Api.search_by_title(movie_title)
   @user.add_to_searches(movie)
-  if movie
+  if !movie.nil?
     puts "Found: #{movie.title}. Score: #{movie.score}" 
-    puts "Your average movie rating is: #{@user.rating}"
-  else
-    puts "Movie not found."
   end
 end
 
