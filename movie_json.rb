@@ -6,6 +6,8 @@ def find_movie
   movie_title = gets
   movie = Api.search_by_title(movie_title)
   puts "Found: #{movie.title}. Score: #{movie.score}"
+rescue 
+  puts "Movie not found."
 end
 
 find_movie
