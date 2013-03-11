@@ -4,11 +4,11 @@ require_relative "lib/api"
 def find_movie
   puts "OH HI. Search?"
   movie_title = gets
-  begin
-    movie = Api.search_by_title(movie_title)
+  movie = Api.search_by_title(movie_title)
+  if movie == :no_movie_found
+    puts "Invalid movie title : #{movie_title.strip}"
+  else
     puts "Found: #{movie.title}. Score: #{movie.score}"
-  rescue ArgumentError => a
-    puts a.message
   end
 end
 

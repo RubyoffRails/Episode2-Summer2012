@@ -16,7 +16,8 @@ class Api
                 score: struct.ratings["critics_score"]
                )
     rescue
-      raise ArgumentError, "invalid movie #{title.strip} given"
+      #raise ArgumentError, "invalid movie #{title.strip} given"
+      return :no_movie_found
     end
   end
 
