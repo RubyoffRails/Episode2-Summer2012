@@ -9,4 +9,5 @@ describe Movie do
     movie.score.should eq(50)
   end
   
+  
 end
