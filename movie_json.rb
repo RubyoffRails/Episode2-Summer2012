@@ -2,13 +2,7 @@ require_relative "lib/movie"
 require_relative "lib/api"
 
 def get_average(movies, attribute)
-  if attribute == "score"
-    data = movies.collect { |i| i.score }
-  elsif attribute == "year"
-    data = movies.collect { |i| i.year }
-  else
-    data = []
-  end
+  data = movies.map(&attribute)
   average = data.inject(0.0) { |sum, rating| sum + rating } / data.size
 end
 
@@ -29,14 +23,18 @@ def find_movie
   movie = Api.search_by_title(movie_title)
   puts "Found: #{movie.title}. Score: #{movie.score}"
   movie
-rescue 
+rescue NoMethodError
  puts "Movie not found."
 end
 
 movies = []
 while true
   movies << find_movie
-  puts "Average rating: #{get_average(movies, "score")}. Average year: #{get_average(movies, "year")}"
+  if movies.last.nil?
+    movies.pop
+  else
+    puts "Average rating: #{get_average(movies, :score)}. Average year: #{get_average(movies, :year)}"
+  end
   puts "Search Again (Y/N)"
   answer = gets.upcase[0]
   if answer != "Y"
