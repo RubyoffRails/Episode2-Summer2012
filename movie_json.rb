@@ -8,25 +8,22 @@ def movies_average(movies_arr)
   scores.inject{ |sum, el| sum + el }.to_f / scores.size
 end
 
+def get_y(sorted_movies, x)
+  y_arr = []
+  sorted_movies.each do |movie|
+    y_arr << movie if movie.year == x
+  end
+  movies_average(y_arr)
+end
+
 def movies_slope(movies_arr)
-  movies_by_year = movies_arr.sort_by! { |movie| movie.year }
-  y2_arr = []
-  y1_arr = []
-  movies_by_year.each do |movie|
-    if movie.year == movies_by_year.first.year
-      y2_arr << movie
-    end
-  end
-  movies_by_year.each do |movie|
-    if movie.year == movies_by_year.last.year
-      y1_arr << movie
-    end
-  end
-  y1 = movies_average(y1_arr)
-  y2 = movies_average(y2_arr)
-  x1 = movies_by_year.last.year
-  x2 = movies_by_year.first.year
-  (y1 - y2).to_f / (x1 - x2).to_f
+  sorted_movies = movies_arr.sort_by { |movie| movie.year }
+  x1 = sorted_movies.last.year    # latest movie year ex: 2012
+  x2 = sorted_movies.first.year   # earliest movie year ex: 1990
+  y1 = get_y(sorted_movies, x1)   # average of the scores from latest year ex: 45
+  y2 = get_y(sorted_movies, x2)   # average of the scores from earliest year ex: 50
+  (y1 - y2).to_f / (x1 - x2).to_f # (45 - 50)to_f / (2012 - 1990).to_f
+                                  #=> -0.22727272727272727
 end
 
 def show_average(movies_arr)
@@ -36,9 +33,10 @@ def show_average(movies_arr)
 end
 
 def show_contentment(movies_arr)
-  if movies_slope(movies_arr) == 0
-    puts "Staying Content"
-  elsif movies_slope(movies_arr) > 0
+  contentment = movies_slope(movies_arr)
+  if contentment == 0.0
+    puts "Perfectly Content"
+  elsif contentment > 0.0
     text_color(BRIGHT, YELLOW)
     puts "Getting Happier"
   else
@@ -57,7 +55,9 @@ def find_movie(movies_arr)
     printf "\tCould not find #{searched_movie}\n"
   else
     text_color(BRIGHT, GREEN)
-    printf "\tFound: #{movie.title}\n\tScore: #{movie.score}\n"
+    printf "\tFound: #{movie.title}\n" +
+           "\t Year: #{movie.year}\n"  +
+           "\tScore: #{movie.score}\n"
     movies_arr << movie
   end
   text_color(RESET, WHITE)
@@ -76,7 +76,10 @@ loop do
     find_movie(movies_arr)
     if movies_arr.size > 1
       show_average(movies_arr)
-      show_contentment(movies_arr)
+      # Show contentment unless all the movies are from the same year
+      show_contentment(movies_arr) unless movies_arr.none? do |movie|
+        movie.year != movies_arr[0].year
+      end
     end
   else
     break
