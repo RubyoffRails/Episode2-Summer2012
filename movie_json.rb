@@ -1,5 +1,6 @@
 require_relative "lib/movie"
 require_relative "lib/api"
+require "ascii_charts"
 
 @movies = []
 @movie_ratings = Hash.new
@@ -29,8 +30,10 @@ def add_to_ratings_hash(movie)
   if @movie_ratings[movie.year.to_i] > movie.score.to_i then
     @movie_ratings[movie.year.to_i] = @movie_ratings[movie.year.to_i] / 2
   end
-  puts "\n\n#################\nMovie Hash: #{@movie_ratings.inspect}\n"
-  puts "Sorted Hash: " + @movie_ratings.sort_by{|k,v|k}.inspect + "\n#################\n"
+  sorted = @movie_ratings.sort_by{|k,v|k}
+  # puts "\n\n#################\nMovie Hash: #{@movie_ratings.inspect}\n"
+  # puts "Sorted Hash: " + sorted.inspect + "\n#################\n"
+  puts AsciiCharts::Cartesian.new(sorted).draw
 end
 
 def movie_list(movies)
