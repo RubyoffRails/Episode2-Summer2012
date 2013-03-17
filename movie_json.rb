@@ -2,6 +2,7 @@ require_relative "lib/movie"
 require_relative "lib/api"
 
 @movies = []
+@movie_ratings = Hash.new
 
 def find_movie
   puts "Add a movie you really like:"
@@ -16,9 +17,20 @@ def find_movie
     average_year = average_year(@movies)
     puts "\nAverage Rating: #{average}"
     puts "Average Year: #{average_year}"
+    add_to_ratings_hash(movie)
   else
     puts "Movie not found\n"
   end
+end
+
+def add_to_ratings_hash(movie)
+  @movie_ratings[movie.year.to_i] ||= 0
+  @movie_ratings[movie.year.to_i] += movie.score.to_i
+  if @movie_ratings[movie.year.to_i] > movie.score.to_i then
+    @movie_ratings[movie.year.to_i] = @movie_ratings[movie.year.to_i] / 2
+  end
+  puts "\n\n#################\nMovie Hash: #{@movie_ratings.inspect}\n"
+  puts "Sorted Hash: " + @movie_ratings.sort_by{|k,v|k}.inspect + "\n#################\n"
 end
 
 def movie_list(movies)
