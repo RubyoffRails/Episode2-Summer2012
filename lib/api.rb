@@ -8,7 +8,11 @@ class Api
 
   def self.search_by_title(title)
     url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{APIKEY}&q=#{URI.encode(title)}&page_limit=1"
-    struct = OpenStruct.new(get_url_as_json(url).fetch("movies").first)
+    movie_json = get_url_as_json(url).fetch("movies").first
+
+    return nil unless movie_json
+
+    struct = OpenStruct.new(movie_json)
     Movie.new(id: struct.id.to_i,
               title: struct.title,
               year: struct.year,
