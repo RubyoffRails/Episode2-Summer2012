@@ -24,10 +24,20 @@ while true do
   if movie
     puts "[#{movie.title}] is already on your list!" unless movie_list.add(movie)
 
-    puts "------------------------------------------"
+    slope = movie_list.slope
+    mood = if slope == nil || slope == 0
+      "I can't determine your mood, maybe add more movie?"
+    elsif slope < 0
+      "I think you are getting madder (index: #{slope.round(2).to_s})"
+    else
+      "I think you are getting happier (index: #{slope.round(2).to_s})"
+    end
+
+    puts "-" * 80
     puts "Your favorite movies: #{movie_list.titles}"
-    puts "Average score: #{movie_list.average_score}"
-    puts "------------------------------------------"
+    puts "Average score: #{movie_list.average_score.round(2)}"
+    puts mood
+    puts "-" * 80
   end
 
   puts "Add more? (Y/N)" 
