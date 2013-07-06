@@ -9,4 +9,10 @@ describe Movie do
     movie.score.should eq(50)
   end
   
+  it "should be equal to other movie with the same id, title, year, score" do
+    movie_1 = Movie.new(id: "1", title: "title1", year: 1998, score: 50)
+    movie_2 = Movie.new(id: "1", title: "title1", year: 1998, score: 50)
+
+    (movie_1 == movie_2).should be_true
+  end
 end
