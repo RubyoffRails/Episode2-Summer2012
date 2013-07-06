@@ -7,4 +7,8 @@ class Movie
     @year = hash.fetch(:year)
     @score = hash.fetch(:score)
   end
+
+  def ==(movie)
+    return id == movie.id && title == movie.title && year == movie.year && score == movie.score
+  end
 end
