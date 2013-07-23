@@ -2,7 +2,7 @@ require_relative "lib/movie"
 require_relative "lib/api"
 
 def find_movie
-  puts "OH HAI. Search?"
+  puts "Add a movie you really like"
   movie_title = gets.chomp
   Api.search_by_title(movie_title)
   puts "Search Again? (Y/N)"
