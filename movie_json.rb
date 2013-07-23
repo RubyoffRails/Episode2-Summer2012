@@ -3,16 +3,15 @@ require_relative "lib/api"
 
 def find_movie
   puts "OH HAI. Search?"
-  movie_title = gets
-  movie = Api.search_by_title(movie_title)
-  puts "Found: #{movie.title}. Score: #{movie.score}"
+  movie_title = gets.chomp
+  Api.search_by_title(movie_title)
+  puts "Search Again? (Y/N)"
 end
 
 find_movie
 
 while true do
-  puts "Search Again (Y/N)" 
-  answer = gets.upcase[0]
+  answer = gets.chomp.upcase[0]
   if answer == "Y"
     find_movie
   else
