@@ -6,15 +6,15 @@ def find_movie
   movie_title = gets.chomp
   Api.search_by_title(movie_title)
   puts "Search Again? (Y/N)"
-end
-
-find_movie
-
-while true do
   answer = gets.chomp.upcase[0]
   if answer == "Y"
     find_movie
   else
-    break
+    puts "The average of the movie you add is: #{Movie.average}"
+    exit
   end
 end
+
+find_movie
+
+
