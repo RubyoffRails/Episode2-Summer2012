@@ -10,7 +10,7 @@ def find_movie
   if answer == "Y"
     find_movie
   else
-    puts "The average of the movie you add is: #{Movie.average}"
+    puts "The score average of the movies you added is: #{Movie.average_score}"
     exit
   end
 end

@@ -51,7 +51,7 @@ describe Api do
   context "Search History" do
 
     before do
-      Api.search_history.clear
+      MovieHistory.searches.clear
       Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/forrest.json")) }
       found_searches = [ "Forrest Gump", "Titanic", "Click" ]
       found_searches.each do | title |
@@ -66,8 +66,8 @@ describe Api do
       end
     end
 
-    it "should show the search history" do
-      Api.search_history.should eq(@user_searches)
+    it "should show the user's search history" do
+      MovieHistory.searches.should eq(@user_searches)
     end
   end
 end
