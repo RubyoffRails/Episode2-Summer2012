@@ -52,25 +52,25 @@ describe Collection do
 		collection.average_per_year.should eq({"1992" => 74, "1995" => 98})
 	end
 		
-		describe "decompose movie array into list of movies by year"
-		
+	describe "decompose movie array into list of movies by year" do
+	
 		it "should return a list of lists for a single movie" do
 			array_of_arrays = collection.array_of_years([], [movie], [])
 			array_of_arrays.should eq([[movie]])
 		end
-		
+	
 		it "should put two movies with different years into different lists" do
 		
-		separate_list = collection.array_of_years([], [movie], [movie3])
-		separate_list.should eq([[movie], [movie3]])
-	end
+			separate_list = collection.array_of_years([], [movie], [movie3])
+			separate_list.should eq([[movie], [movie3]])
+		end
+
+		it "should put two movies with the same year in the same list" do
 	
-	it "should put two movies with the same year in the same list" do
-		
-		
 			separate_list = collection.array_of_years([], [movie], [movie2])
 			separate_list.should eq([[movie, movie2]])
 		end
+	end
 			
 	it "should separate a collection of movies by year" do
 		collection.add_movie movie
@@ -80,4 +80,17 @@ describe Collection do
 		
 		separate_list.should eq([[movie, movie2], [movie3]])
 	end
+	
+	it "should calculate the slope of ratings from the first year to the last year of the collection" do
+		collection.add_movie movie
+		collection.add_movie movie2
+		collection.add_movie movie3
+		collection.rating_slope.should eq(8)
+	end
+	
+	it "should return a sentintal if it can't compute the slope" do
+		collection.add_movie movie
+		collection.rating_slope.should eq(:NeedMoreData)
+	end
+	
 end

@@ -51,5 +51,19 @@ class Collection
 			end
 		end
 	end
+	
+	def rating_slope
+		yearly_averages = average_per_year
+		# I think the keys should already be sorted by year, but just in case do it anyway
+		sorted_years = yearly_averages.keys.sort
+
+		return :NeedMoreData if sorted_years.length < 2
+		
+		first_avg = yearly_averages[sorted_years.first]
+		last_avg = yearly_averages[sorted_years.last]
+		
+		(first_avg - last_avg).to_f / (sorted_years.first.to_i - sorted_years.last.to_i).to_f
+		
+	end
 		
 end

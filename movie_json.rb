@@ -39,6 +39,16 @@ def show_averages_by_year
   yearly_averages.each { |year, avg| puts "#{year} : #{avg}" }
 end
 
+def show_slope
+  slope = @collection.rating_slope
+  puts "The slope of your movie ratings is #{slope}."
+  if slope < 0
+    puts "Your tastes are declining. You mad, bro?"
+  else
+    puts "The quality of films is improving. Release that anger!"
+  end
+end
+
 find_movie
 
 while true do
@@ -50,6 +60,7 @@ while true do
     show_collection_average
     show_year_average
     show_averages_by_year
+    show_slope
     break
   end
 end
