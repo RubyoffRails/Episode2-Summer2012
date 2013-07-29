@@ -1,9 +1,9 @@
 require_relative "../lib/movie"
-require_relative "../lib/collection"
+require_relative "../lib/movie_collection"
 
-describe Collection do
+describe MovieCollection do
 	
-	let(:collection) {Collection.new}
+	let(:collection) {MovieCollection.new}
 	let(:movie) {Movie.new(title: "Pulp Fiction", year: 1992, id: 233, score: 50) }
 	let(:movie2) { Movie.new(title: "Run Lola Run", year: 1992, id: 233, score: 98)}
 	let(:movie3) { Movie.new(title: "Run Lola Run", year: 1995, id: 233, score: 98)}
@@ -18,7 +18,7 @@ describe Collection do
 	end
 	
 	it "should not add the Not Found sentinel" do
-		collection.add_movie :NotFound
+		collection.add_movie :not_found
 		collection.movies.should eq([])
 	end
 	
@@ -49,36 +49,13 @@ describe Collection do
 		collection.add_movie movie
 		collection.add_movie movie3
 		collection.add_movie movie2
-		collection.average_per_year.should eq({"1992" => 74, "1995" => 98})
-	end
-		
-	describe "decompose movie array into list of movies by year" do
-	
-		it "should return a list of lists for a single movie" do
-			array_of_arrays = collection.array_of_years([], [movie], [])
-			array_of_arrays.should eq([[movie]])
-		end
-	
-		it "should put two movies with different years into different lists" do
-		
-			separate_list = collection.array_of_years([], [movie], [movie3])
-			separate_list.should eq([[movie], [movie3]])
-		end
-
-		it "should put two movies with the same year in the same list" do
-	
-			separate_list = collection.array_of_years([], [movie], [movie2])
-			separate_list.should eq([[movie, movie2]])
-		end
+		collection.average_per_year.should eq({1992 => 74, 1995 => 98})
 	end
 			
-	it "should separate a collection of movies by year" do
-		collection.add_movie movie
-		collection.add_movie movie2
-		collection.add_movie movie3
-		separate_list = collection.separate_by_years
+	it "should separate an array of movies by year" do
+		movie_hash = collection.movies_by_year [movie, movie2, movie3]
 		
-		separate_list.should eq([[movie, movie2], [movie3]])
+		movie_hash.should eq({1992 => [movie, movie2], 1995 => [movie3]})
 	end
 	
 	it "should calculate the slope of ratings from the first year to the last year of the collection" do
@@ -90,7 +67,7 @@ describe Collection do
 	
 	it "should return a sentintal if it can't compute the slope" do
 		collection.add_movie movie
-		collection.rating_slope.should eq(:NeedMoreData)
+		collection.rating_slope.should eq(:need_more_data)
 	end
 	
 end

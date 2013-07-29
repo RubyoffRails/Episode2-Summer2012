@@ -1,9 +1,9 @@
 require_relative "lib/movie"
 require_relative "lib/api"
-require_relative "lib/collection"
+require_relative "lib/movie_collection"
 
 
-@collection = Collection.new
+@collection = MovieCollection.new
 
 def find_movie
   puts "OH HAI. Add a movie to your collection?"
