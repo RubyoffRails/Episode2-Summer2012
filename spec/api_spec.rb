@@ -36,3 +36,4 @@ describe Api do
     expect(Api.search_by_title("")).to be_false
   end
 end
+
