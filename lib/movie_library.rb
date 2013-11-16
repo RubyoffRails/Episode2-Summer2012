@@ -22,7 +22,7 @@ class MovieLibrary
   def slope
     sorted_movies = sort_movies
     return 0 if sorted_movies.last.year == sorted_movies.first.year
-    (sorted_movies.last.score - sorted_movies.first.score).to_f / (sorted_movies.last.year - sorted_movies.first.year)
+    (sorted_movies.last.score - sorted_movies.first.score).to_f / (sorted_movies.last.year - sorted_movies.first.year).to_f
   end
 
   private
