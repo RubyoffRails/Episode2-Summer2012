@@ -18,7 +18,7 @@ def find_movie library
     if library.slope > 0
       puts "Postive Slope: Getting Happier"
     elsif library.slope < 0
-      puts "Negative Slope: Getting Sadder"
+      puts "Negative Slope: Getting Madder"
     else
       puts "Neutral Slope: Your pretty balanced"
     end
