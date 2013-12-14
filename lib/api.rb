@@ -1,10 +1,11 @@
 require "open-uri"
 require "json"
-require "ostruct"
 require_relative "./movie"
+require_relative "./api_key"
+
 class Api
 
-  APIKEY="4t6456xa33z8qhcqyuqgnkjh"
+  APIKEY=API_KEY
 
   def self.search_by_title(title)
     url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{APIKEY}&q=#{URI.encode(title)}&page_limit=1"
