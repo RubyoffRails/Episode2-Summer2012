@@ -1,4 +1,12 @@
 require_relative "../lib/movie"
+require_relative "../movie_json"
+
+# describe "#movie_search_by_title" do
+# 	it "should return a warning when no movie is entered into the search" do 
+# 		expect(movie_search_by_title).to eq(String)
+#   	end
+# end
+
 describe Movie do
 
   it "should store the title, year, and score" do

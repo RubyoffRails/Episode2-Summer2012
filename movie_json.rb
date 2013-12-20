@@ -4,10 +4,14 @@ require_relative "lib/api"
 def movie_search_by_title
   puts "OH HAI. Please enter movie title"
   print ">>" 
-  movie_title = gets
-  puts "Cool, searching for #{movie_title}"
-  search = Api.search_by_title(movie_title)
-  puts "#{movie_title} was released in #{search.year}. It recieved a critics score of #{search.score}"
+  movie_title = gets.chomp
+  if movie_title.empty?
+    puts "Sorry, but you have to actually enter something to search"
+  else
+    puts "Cool, searching for #{movie_title}"
+    search = Api.search_by_title(movie_title)
+    puts "#{movie_title} was released in #{search.year}. It recieved a critics score of #{search.score}"
+  end
 end
 
 def search_again(response)

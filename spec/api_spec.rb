@@ -3,7 +3,7 @@ require "ostruct"
 
 describe Api do
 
-  let(:movie) { Api.search_by_title("Forrest Gump") }
+  let(:movie)    { Api.search_by_title("Forrest Gump") }
 
   before do
     Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/forrest.json")) }
@@ -23,5 +23,17 @@ describe Api do
 
   it "should return the year" do
     movie.year.should eq(1994)
+  end
+
+  it "should return a warning statement if movie was not found" do
+      Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/no_movie.json")) }
+      no_movie = Api.search_by_title("dfsfsfdf")
+      expect(no_movie.class).to eq(String)
+  end
+
+  it "should return a warning when no movie is entered into the search" do 
+      Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/no_movie.json")) }
+      no_movie = Api.search_by_title("dfsfsfdf")
+      expect(no_movie.class).to eq(String)
   end
 end
