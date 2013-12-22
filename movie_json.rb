@@ -40,7 +40,7 @@ class MovieJson
   end
 
   def search
-    puts "Would you like to: \n1) Search\n2) Calculate happiness?\n3) Exit?"
+    puts "Would you like to: \n1) Search\n2) Average rating?\n3) Average year?\n4) Calculate movie happiness?\n5) Exit?"
     print ">>"
     u_start = gets.chomp
     if u_start == "1"
@@ -52,6 +52,12 @@ class MovieJson
       end
     search
     elsif u_start == "2"
+      puts average_raiting
+      search
+    elsif u_start == "3"
+      puts average_year
+      search
+    elsif u_start == "4"
       puts calculate_happiness
       search
     else
@@ -59,8 +65,31 @@ class MovieJson
     end
   end
 
-  def calculate_happiness
+  def average_raiting
     @movies.map {|movie| movie.score}.reduce(:+).to_f / @movies.size
+  end
+
+  def average_year
+    avg_year = @movies.map { |movie| movie.year}.reduce(:+).to_f / @movies.size
+    avg_year.to_i
+  end
+
+  def calculate_happiness
+    # ratings = @movies.map { |movie| movie.score  }
+    year_avg = {}
+    @movies.each { |movie| year_avg[movie.year] = []              }
+    @movies.each { |movie| year_avg[movie.year].push(movie.score) }
+    years = @movies.map { |movie| movie.year}.sort
+    oldest_year_avg = year_avg[years[0]].reduce(:+).to_f / year_avg[years[0]].size
+    youngest_year_avg = year_avg[years[-1]].reduce(:+).to_f / year_avg[years[-1]].size
+    slope = years[0] - years[-1] != 0 ? (youngest_year_avg - oldest_year_avg).to_f / (years[-1] - years[0]).to_f : 0
+    if slope == 0
+      return "You're neutral"
+    elsif slope > 0
+      return "You're getting happier!"
+    else
+      return "You're getting sadder"
+    end
   end
 
 end
