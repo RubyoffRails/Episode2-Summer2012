@@ -28,7 +28,7 @@ describe Api do
   it "should return a warning statement if movie was not found" do
       Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/no_movie.json")) }
       no_movie = Api.search_by_title("dfsfsfdf")
-      expect(no_movie.class).to eq(String)
+      expect(no_movie.title).to be_nil
   end
 
 end
