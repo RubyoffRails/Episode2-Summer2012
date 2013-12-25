@@ -1,4 +1,8 @@
 require_relative "../lib/movie"
+
+
+
+
 describe Movie do
 
   it "should store the title, year, and score" do
