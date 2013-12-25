@@ -77,14 +77,21 @@ class MovieJson
     avg_year.to_i
   end
 
+  def sort_years(movies)
+    movies.map{ |movie| movie.year }.sort
+  end
+
+  def average_rating_by_year(movie_hash_by_year,year)
+    movies = movie_hash_by_year[year]
+    movies.map { |movie| movie.score }.reduce(:+) / movies.length
+  end
+
+  def movie_rating_slope(years,movie_hash_by_year)
+    years[0] - years[-1] != 0 ? (average_rating_by_year(movie_hash_by_year,years[-1]) - average_rating_by_year(movie_hash_by_year,years[0])).to_f / (years[-1] - years[0]).to_f : 0
+  end
+
   def calculate_happiness
-    year_avg = {}
-    @movies.each { |movie| year_avg[movie.year] = []              }
-    @movies.each { |movie| year_avg[movie.year].push(movie.score) }
-    years = @movies.map { |movie| movie.year}.sort
-    oldest_year_avg = year_avg[years[0]].reduce(:+).to_f / year_avg[years[0]].size
-    youngest_year_avg = year_avg[years[-1]].reduce(:+).to_f / year_avg[years[-1]].size
-    slope = years[0] - years[-1] != 0 ? (youngest_year_avg - oldest_year_avg).to_f / (years[-1] - years[0]).to_f : 0
+    slope = movie_rating_slope(sort_years(@movies),@movies.group_by {|movie| movie.year})
     if slope == 0
       return "You're neutral"
     elsif slope > 0
