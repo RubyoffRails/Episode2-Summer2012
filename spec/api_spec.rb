@@ -25,13 +25,19 @@ describe Api do
       it "should return the year" do
         movie.year.should eq(1994)
       end
+
+      it "should add the search result to movie_list"
     end
 
     context "when title not found" do
       let(:movie) { Api.search_by_title("asdfasdfasdf") }
 
-      it "should not raise an error" do
-        movie.title.should_not raise_error
+      before do
+        Api.stub(:get_url_as_json) { JSON.parse(File.read("spec/fixtures/no_result.json")) }
+      end
+
+      it "should return a not found title" do
+        movie.title.should eq("no results")
       end
     end
   end
