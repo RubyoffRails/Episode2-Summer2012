@@ -25,8 +25,6 @@ describe Api do
       it "should return the year" do
         movie.year.should eq(1994)
       end
-
-      it "should add the search result to movie_list"
     end
 
     context "when title not found" do
