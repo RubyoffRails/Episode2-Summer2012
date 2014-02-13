@@ -1,21 +1,16 @@
-require_relative "lib/movie"
-require_relative "lib/api"
+require_relative "lib/movie_clerk"
 
-def find_movie
-  puts "OH HAI. Search?"
-  movie_title = gets
-  movie = Api.search_by_title(movie_title)
-  puts "Found: #{movie.title}. Score: #{movie.score}"
-end
-
-find_movie
+clerk = MovieClerk.new
+puts clerk.welcome_message
+clerk.find_movie
 
 while true do
-  puts "Search Again (Y/N)" 
+  puts "Search Again (Y/N)"
   answer = gets.upcase[0]
-  if answer == "Y"
-    find_movie
-  else
+  if answer == "N"
     break
+  else
+    clerk.find_movie
+    clerk.analyze_taste if clerk.perform_taste_analysis?
   end
 end

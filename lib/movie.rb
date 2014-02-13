@@ -8,3 +8,12 @@ class Movie
     @score = hash.fetch(:score)
   end
 end
+
+class NotFoundMovie
+  attr_reader :title, :score
+
+  def initialize
+    @title = "no results"
+    @score = "N/A"
+  end
+end
