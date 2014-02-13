@@ -19,14 +19,14 @@ describe MovieClerk do
       clerk.search_by_title("fargo")
       clerk.search_by_title("spaceballs")
       clerk.analyze_taste
-      clerk.taste_measurement.should eq(4.444444444444445)
+      clerk.taste_measurement.should be_within(0.01).of(4.44)
     end
     it "should tell the user their taste is diminishing over time" do
       clerk = MovieClerk.new
       clerk.search_by_title("gigli")
       clerk.search_by_title("fargo")
       clerk.analyze_taste
-      clerk.taste_measurement.should eq(-12.571428571428571)
+      clerk.taste_measurement.should be_within(0.01).of(-12.57)
     end
   end
 

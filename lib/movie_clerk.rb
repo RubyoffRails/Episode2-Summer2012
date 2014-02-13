@@ -5,7 +5,6 @@ class MovieClerk
 
   def initialize
     @movies = []
-    @scores = []
     @welcome_message = "Welcome to The Movie Clerk!"
   end
 
@@ -42,9 +41,7 @@ class MovieClerk
   end
 
   def movie_score_average
-    @movies.each do |movie|
-      @scores << movie.score
-    end
-    @scores.inject{ | sum, n | sum + n}.to_f / @scores.size
+    scores = @movies.map {|m| m.score}
+    scores.inject(:+).to_f / scores.size
   end
 end
