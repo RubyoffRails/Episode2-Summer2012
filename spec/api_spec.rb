@@ -24,4 +24,8 @@ describe Api do
   it "should return the year" do
     movie.year.should eq(1994)
   end
+
+  it "should not raise an error when searching for a non-existent movie" do
+    expect { Api.search_by_title("NOTHINGFOUNDHERE") }.to_not raise_error
+  end
 end
