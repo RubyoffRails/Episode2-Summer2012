@@ -1,3 +1,4 @@
+require_relative './movie_library'
 class Movie
 
   @@movies = []
@@ -7,6 +8,7 @@ class Movie
     @title = hash.fetch(:title)
     @year = hash.fetch(:year)
     @score = hash.fetch(:score)
+    MovieLibrary.new.register(self)
   end
 
   def self.build(args)

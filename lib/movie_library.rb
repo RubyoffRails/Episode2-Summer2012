@@ -5,7 +5,15 @@ class MovieLibrary
     @movies = []
   end
 
-  def self.all_movies
+  def average_rating
+    all_movies.inject(0.0) { |sum, movie| sum + movie.score } / all_movies.size
+  end
+
+  def register(movie)
+    @movies << movie
+  end
+
+  def all_movies
     @movies
   end
 
