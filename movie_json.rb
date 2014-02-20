@@ -13,14 +13,14 @@ def find_movie
 end
 
 find_movie
-puts "The average rating is #{Movie.average_rating}."
+puts "The average rating for all movies searched is #{Movie.average_rating}."
 
 while true do
   puts "Search Again (Y/N)"
   answer = gets.upcase[0]
   if answer == "Y"
     find_movie
-    puts "The average rating is #{Movie.average_rating}."
+    puts "The average rating for all movies searched is #{Movie.average_rating}."
   else
     break
   end
