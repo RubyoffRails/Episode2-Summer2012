@@ -8,5 +8,4 @@ class Movie
     @year = hash.fetch(:year)
     @score = hash.fetch(:score)
   end
-
 end

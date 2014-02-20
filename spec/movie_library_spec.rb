@@ -29,6 +29,7 @@ describe MovieLibrary do
   end
 
   describe "#average_rating" do
+
     it "should have no average rating when no movies are cataloged" do
       movie_library.average_rating.should eq(0)
     end
@@ -36,6 +37,20 @@ describe MovieLibrary do
     it 'should calculate the average rating' do
       movie_library.catalog(movie)
       movie_library.average_rating.should eq(50)
+    end
+  end
+
+  describe "#average_rating_by_year" do
+
+    it 'should have no average yearly rating when no movies are cataloged' do
+      movie_library.average_rating_by_year(movie.year).should eq(0)
+    end
+
+    it 'should calculate the average rating by year when the library has' do
+      movie_library.catalog(Movie.new(id: "the-id", title: "the-title", year: 1998, score: 50))
+      movie_library.catalog(Movie.new(id: "the-id", title: "the-title", year: 2000, score: 50))
+      movie_library.catalog(Movie.new(id: "the-id", title: "the-title", year: 1998, score: 50))
+      movie_library.average_rating_by_year(1998).should eq(50)
     end
   end
 end
