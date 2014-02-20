@@ -16,35 +16,6 @@ describe Movie do
     it 'should a movie object' do
       movie.is_a?(Movie).should be_true
     end
-
-    it 'should not change the movie count' do
-      Movie.count.should eq(0)
-    end
 	end
 
-  describe ".build" do
-
-    it "records the movie when I build it" do
-      movie = Movie.build(id: 10020, title: 'Pirates of the Caribbean: The Curse of the Black Pearl', year: 2003, score: 79)
-      expect(Movie.all_movies).to include (movie)
-    end
-
-    it "should increment the movie count" do
-      expect{Movie.build(id: 10036, title: 'Forrest Gump', year: 1994, score: 71)}.to change{Movie.count}.from(1).to(2)
-    end
-  end
-
-  describe ".average_rating" do
-    it "should have no average rating initially" do
-      #how do you mock this scenario
-    end
-
-    it 'should calculate the average rating while ignoring the Movie#build calls above' do
-      #how do you change scope for RSpec object. Or rather how do you reset the Movie object instance variables?
-    end
-
-    it "should calculate the average rating for Forrest Gump and Pirates of the...as 75 " do
-      Movie.average_rating.should eq(75)
-    end
-  end
 end
