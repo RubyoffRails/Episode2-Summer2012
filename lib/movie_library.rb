@@ -10,7 +10,7 @@ class MovieLibrary
     all_movies.inject(0.0) { |sum, movie| sum + movie.score } / all_movies.size
   end
 
-  def register(movie)
+  def catalog(movie)
     @movies << movie
   end
 

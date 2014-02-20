@@ -3,7 +3,6 @@ require "ostruct"
 
 describe Api do
 
-  context "A movie" do
     let(:movie) { Api.search_by_title("Forrest Gump") }
 
     before do
@@ -29,7 +28,5 @@ describe Api do
     it "should not raise an error when searching for a non-existent movie" do
       expect { Api.search_by_title("NOTHINGFOUNDHERE") }.to_not raise_error
     end
-  end 
 
-  context ""
 end

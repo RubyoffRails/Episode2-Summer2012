@@ -16,14 +16,14 @@ describe MovieLibrary do
     end
   end
 
-  describe "#register" do
+  describe "#catalog" do
 
     it 'should add a new movie to the library whenever a search happens' do
-      movie_library.register(movie)
+      movie_library.catalog(movie)
       expect(movie_library.all_movies).to include (movie)
     end
     it 'should increase the movie count' do
-      movie_library.register(movie)
+      movie_library.catalog(movie)
       movie_library.count.should eq(1)
     end
   end
@@ -34,7 +34,7 @@ describe MovieLibrary do
     end
 
     it 'should calculate the average rating' do
-      movie_library.register(movie)
+      movie_library.catalog(movie)
       movie_library.average_rating.should eq(50)
     end
   end

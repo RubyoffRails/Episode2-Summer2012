@@ -2,7 +2,7 @@ require "open-uri"
 require "json"
 require "ostruct"
 require_relative "./movie"
-require_relative "./movie_list"
+require_relative "./movie_library"
 class Api
 
   APIKEY="4t6456xa33z8qhcqyuqgnkjh"
