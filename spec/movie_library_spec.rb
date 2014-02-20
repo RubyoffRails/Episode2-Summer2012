@@ -31,12 +31,12 @@ describe MovieLibrary do
   describe "#average_rating" do
 
     it "should have no average rating when no movies are cataloged" do
-      movie_library.average_rating.should eq(0)
+      movie_library.average_rating(Array.new).should eq(0)
     end
 
     it 'should calculate the average rating' do
       movie_library.catalog(movie)
-      movie_library.average_rating.should eq(50)
+      movie_library.average_rating(movie_library.all_movies).should eq(50)
     end
   end
 
