@@ -29,12 +29,13 @@ describe MovieLibrary do
   end
 
   describe "#average_rating" do
-    it "should have no average rating initially" do
+    it "should have no average rating when no movies are cataloged" do
       movie_library.average_rating.should eq(0)
     end
 
-    xit 'should calculate the average rating' do
-
+    it 'should calculate the average rating' do
+      movie_library.register(movie)
+      movie_library.average_rating.should eq(50)
     end
   end
 end
