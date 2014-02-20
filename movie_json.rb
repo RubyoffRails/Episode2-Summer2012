@@ -7,6 +7,7 @@ def find_movie
     movie_title = gets
     movie = Api.search_by_title(movie_title)
     puts "Added: #{movie.title}. Score: #{movie.score}"
+    puts "Average score for the year: #{Movie.average_rating}"
   rescue NoMethodError
     puts "Not found."
   end
@@ -20,7 +21,7 @@ while true do
   answer = gets.upcase[0]
   if answer == "Y"
     find_movie
-    puts "The average rating for all movies searched is #{Movie.average_rating}."
+    puts "Average score for the year: #{Movie.average_rating}"
   else
     break
   end

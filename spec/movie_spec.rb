@@ -13,7 +13,7 @@ describe Movie do
 	    movie.score.should eq(50)
 	  end
 
-    it 'should inherit from vehicle' do
+    it 'should a movie object' do
       movie.is_a?(Movie).should be_true
     end
 
@@ -23,7 +23,7 @@ describe Movie do
 	end
 
   describe ".build" do
-    
+
     it "records the movie when I build it" do
       movie = Movie.build(id: 10020, title: 'Pirates of the Caribbean: The Curse of the Black Pearl', year: 2003, score: 79)
       expect(Movie.all_movies).to include (movie)
