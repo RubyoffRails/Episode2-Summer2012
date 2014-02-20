@@ -16,7 +16,11 @@ class Movie
   end
 
   def self.average_rating
-    @@movies.inject(0.0) { |sum, movie| sum + movie.score } / @@movies.size
+    all_movies.inject(0.0) { |sum, movie| sum + movie.score } / all_movies.size
+  end
+
+  def self.count
+     @@movies.count
   end
 
   def self.all_movies
