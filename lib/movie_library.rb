@@ -6,6 +6,7 @@ class MovieLibrary
   end
 
   def average_rating
+    return 0 if count == 0
     all_movies.inject(0.0) { |sum, movie| sum + movie.score } / all_movies.size
   end
 
