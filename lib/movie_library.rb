@@ -6,9 +6,7 @@ class MovieLibrary
   end
 
   def average_rating_by_year(year)
-    result = all_movies.select {|movie| movie.year == year}
-    return 0 if result.length == 0
-    average_rating(result)
+    average_rating all_movies.select {|movie| movie.year == year}
   end
 
   def average_rating(movies)

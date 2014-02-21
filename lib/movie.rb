@@ -1,4 +1,3 @@
-require_relative './movie_library'
 class Movie
 
   attr_reader :id, :title, :year, :score
