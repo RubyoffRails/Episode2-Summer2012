@@ -42,7 +42,7 @@ Slope of line is `(y1 - y2) / (x1 - x2)` ... In this case, if my average rating 
 
 ```
 (45 - 50).to_f / (2012 - 1990).to_f
-=> -0.22727272727272727  
+=> -0.22727272727272727
 # getting madder
 ```
 

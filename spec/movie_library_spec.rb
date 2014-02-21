@@ -53,4 +53,25 @@ describe MovieLibrary do
       movie_library.average_rating_by_year(1998).should eq(50)
     end
   end
+
+  describe "#sort_by_year" do
+
+    it 'should sort the movies by year' do
+      another_movie = Movie.new(id: "the-id", title: "the-title", year: 2012, score: 50)
+      yet_another_movie = Movie.new(id: "the-id", title: "the-title", year: 1990, score: 45)
+      movie_library.catalog(another_movie)
+      movie_library.catalog(yet_another_movie)
+      movie_library.sort_by_year.should == [yet_another_movie, another_movie]
+    end
+  end
+
+  describe "#calculate_slope" do
+    it 'should calculate the slope of the average ratings from the first year to the last year' do
+      another_movie = Movie.new(id: "the-id", title: "the-title", year: 2012, score: 50)
+      yet_another_movie = Movie.new(id: "the-id", title: "the-title", year: 1990, score: 45)
+      movie_library.catalog(another_movie)
+      movie_library.catalog(yet_another_movie)
+      movie_library.calculate_slope.should eq(-0.22727272727272727)
+    end
+  end
 end
