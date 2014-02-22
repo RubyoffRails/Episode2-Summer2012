@@ -1,17 +1,20 @@
 class MovieLibrary
 
-  attr_reader :movies
+  attr_reader :movies, :library, :slope
   def initialize
     @movies = []
+    @library = []
+    @slope = 0
   end
 
-  def calculate_slope
-    sorted_catalog = sort_by_year
-    (sorted_catalog.first.score - sorted_catalog.last.score).to_f / (sorted_catalog.last.year - sorted_catalog.first.year).to_f
+  def calculate_slope(catalog)
+    first = catalog.first
+    last = catalog.last
+    (first.score - last.score).to_f / (last.year - first.year).to_f
   end
 
-  def sort_by_year
-    all_movies.sort { |movie,another_movie| movie.year <=> another_movie.year }
+  def sort_by_year(movies)
+    movies.sort { |movie,another_movie| movie.year <=> another_movie.year }
   end
 
   def average_rating_by_year(year)
@@ -25,6 +28,9 @@ class MovieLibrary
 
   def catalog(movie)
     @movies << movie
+    @library = sort_by_year(@movies)
+    @slope = calculate_slope(@library)
+    return @library
   end
 
   def all_movies
