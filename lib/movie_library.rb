@@ -10,6 +10,7 @@ class MovieLibrary
   def calculate_slope(catalog)
     first = catalog.first
     last = catalog.last
+    return 0 if first == last
     (first.score - last.score).to_f / (last.year - first.year).to_f
   end
 

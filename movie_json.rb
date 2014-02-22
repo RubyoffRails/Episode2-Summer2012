@@ -14,19 +14,29 @@ end
 
 movie_library = MovieLibrary.new
 movie = find_movie
+unless movie.nil?
 movie_library.catalog(movie)
 puts "Found: #{movie.title}. Score: #{movie.score}"
-puts "The average rating for all movies searched thus far is #{movie_library.average_rating}."
+end
 
 while true do
   puts "Search Again (Y/N)"
   answer = gets.upcase[0]
   if answer == "Y"
     movie = find_movie
+    unless movie.nil?
     movie_library.catalog(movie)
     puts "Found: #{movie.title}. Score: #{movie.score}"
-    puts "The average rating for all movies searched thus far is #{movie_library.average_rating}."
+    end
   else
+    puts "\n--------------------------"
+    puts "Summary for your Movie Library"
+    puts "-----------------------------"
+    movie_library.library.each do |movie|
+      puts "ID: #{movie.id}\tMovie: #{movie.title}\tYear: #{movie.year} Score: #{movie.score}\tAverage: #{movie_library.average_rating_by_year(movie.year)}"
+    end
+    puts "Your library has a Happiness Index of: #{movie_library.slope}"
+    puts "Goodbye!!!"
     break
   end
 end

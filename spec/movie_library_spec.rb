@@ -66,10 +66,16 @@ describe MovieLibrary do
   end
 
   describe "#calculate_slope" do
+
+    it "should have no slope when the library only contains one movie" do
+      movie_library.catalog(movie)
+      movie_library.slope.should eq(0)
+    end
     it 'should calculate the slope of the average ratings from the first year to the last year' do
       movie_library.catalog(another_movie)
       movie_library.catalog(yet_another_movie)
       movie_library.slope.should eq(-0.22727272727272727)
     end
+
   end
 end
