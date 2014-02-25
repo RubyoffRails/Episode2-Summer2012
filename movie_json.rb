@@ -14,9 +14,9 @@ end
 
 movie_library = MovieLibrary.new
 movie = find_movie
-unless movie.nil?
-movie_library.catalog(movie)
-puts "Found: #{movie.title}. Score: #{movie.score}"
+if movie
+  movie_library.catalog(movie)
+  puts "Found: #{movie.title}. Score: #{movie.score}"
 end
 
 while true do
@@ -24,9 +24,9 @@ while true do
   answer = gets.upcase[0]
   if answer == "Y"
     movie = find_movie
-    unless movie.nil?
-    movie_library.catalog(movie)
-    puts "Found: #{movie.title}. Score: #{movie.score}"
+    if movie
+      movie_library.catalog(movie)
+      puts "Found: #{movie.title}. Score: #{movie.score}"
     end
   else
     puts "\n--------------------------"
