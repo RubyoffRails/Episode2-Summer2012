@@ -30,8 +30,7 @@ class MovieLibrary
 
   def add(movie)
     movies << movie
-    catalog = sort_by_year(movies)
-    calculate_slope(catalog)
+    calculate_slope sort_by_year(movies)
   end
 
   def all_movies
