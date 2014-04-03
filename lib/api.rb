@@ -2,6 +2,7 @@ require "open-uri"
 require "json"
 require "ostruct"
 require_relative "./movie"
+require_relative "./movie_library"
 class Api
 
   APIKEY="4t6456xa33z8qhcqyuqgnkjh"
@@ -15,7 +16,6 @@ class Api
               score: struct.ratings["critics_score"]
              )
   end
-
 
   def self.get_url_as_json(url)
     JSON.parse(open(url).read)
