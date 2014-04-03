@@ -15,7 +15,7 @@ end
 movie_library = MovieLibrary.new
 movie = find_movie
 if movie
-  movie_library.catalog(movie)
+  movie_library.add(movie)
   puts "Found: #{movie.title}. Score: #{movie.score}"
 end
 
@@ -25,14 +25,14 @@ while true do
   if answer == "Y"
     movie = find_movie
     if movie
-      movie_library.catalog(movie)
+      movie_library.add(movie)
       puts "Found: #{movie.title}. Score: #{movie.score}"
     end
   else
     puts "\n--------------------------"
     puts "Summary for your Movie Library"
     puts "-----------------------------"
-    movie_library.library.each do |movie|
+    movie_library.all_movies.each do |movie|
       puts "ID: #{movie.id}\tMovie: #{movie.title}\tYear: #{movie.year} Score: #{movie.score}\tAverage: #{movie_library.average_rating_by_year(movie.year)}"
     end
     puts "Your library has a Happiness Index of: #{movie_library.slope}"
